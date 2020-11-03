@@ -33,22 +33,20 @@ public class dataDriven {
 				Row firstrow = rows.next();
 
 				Iterator<Cell> ce = firstrow.cellIterator(); // row is collection of cells
-				// int k = 0;
 				int column = 0;
 				while (ce.hasNext()) {
 					Cell value = ce.next();
 					//System.out.print(value.getStringCellValue() + ' ');
 					if (value.getStringCellValue().equalsIgnoreCase("testcases")) {
 
-						column = value.getColumnIndex(); // индекс колонки
+						column = value.getColumnIndex();
 					}
-					// k++;
 				}
 				System.out.println();
 				// System.out.println(column);
 				// When column is identified then scan entire testcase column to find PUrchase
 				while (rows.hasNext()) {
-					Row r = rows.next(); // rows -итератор строк как i
+					Row r = rows.next(); // rows iterator
 
 					if (r.getCell(column) != null && r.getCell(column).getStringCellValue().equalsIgnoreCase(testcaseName)) {
 						// System.out.println(r.getCell(column));
