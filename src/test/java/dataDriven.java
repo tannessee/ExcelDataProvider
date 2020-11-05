@@ -14,17 +14,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class dataDriven {
 
-	public ArrayList<String> getData(String testcaseName) throws IOException {
+	public ArrayList<String> getData(String testcaseName, String sheetName) throws IOException {
 
 		ArrayList<String> a = new ArrayList<String>();
 
-		FileInputStream fis = new FileInputStream("C://Udemy//demodata.xlsx");
+		FileInputStream fis = new FileInputStream("demodata.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		int sheets = workbook.getNumberOfSheets(); // количсетво страниц
+		int sheets = workbook.getNumberOfSheets(); 
 
 		for (int i = 0; i < sheets; i++) {
-			if (workbook.getSheetName(i).equalsIgnoreCase("testdata")) {
+			if (workbook.getSheetName(i).equalsIgnoreCase(sheetName)) {
 
 				XSSFSheet sheet = workbook.getSheetAt(i);
 
@@ -42,18 +42,16 @@ public class dataDriven {
 						column = value.getColumnIndex();
 					}
 				}
-				System.out.println();
 				// System.out.println(column);
 				// When column is identified then scan entire testcase column to find PUrchase
 				while (rows.hasNext()) {
-					Row r = rows.next(); // rows iterator
+					Row r = rows.next();
 
 					if (r.getCell(column) != null && r.getCell(column).getStringCellValue().equalsIgnoreCase(testcaseName)) {
-						// System.out.println(r.getCell(column));
+						//System.out.println(r.getCell(column));
 
-						// After grabbing purchase testcase row = pull all the data of that row and feed
-						// into test
-						Iterator<Cell> cv = r.cellIterator(); // cv - итератор ячеек
+						// After grabbing purchase testcase row = pull all the data of that row and feed into test
+						Iterator<Cell> cv = r.cellIterator(); 
 
 						while (cv.hasNext()) {
 							Cell c = cv.next();
